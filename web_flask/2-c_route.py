@@ -25,8 +25,8 @@ def hbnb():
 # creates a /c/<text> route
 @app.route('/c/<text>', strict_slashes=False)
 def c(text):
-    content = text.replace("_", " ")
-    return (content)
+    """A route controller for the /c/<text> page """
+    return (text.replace("_", " "))
 
 
 # run the development server
