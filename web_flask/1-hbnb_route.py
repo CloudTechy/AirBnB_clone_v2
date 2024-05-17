@@ -19,7 +19,7 @@ def index():
 @app.route('/hbnb', strict_slashes=False)
 def hbnb():
     """A route controller for the hbnb page """
-    return "Welcome to HBNB!"
+    return "HBNB"
 
 
 # run the development server
