@@ -30,6 +30,15 @@ def c_route(text):
     return (f'C {content}')
 
 
+# creates a /python/<text> route
+@app.route('/python/<text>', strict_slashes=False)
+@app.route('/python', strict_slashes=False)
+def python_route(text='is cool'):
+    """A route controller for the /python/<text> page """
+    content = text.replace("_", " ")
+    return f'Python {content}'
+
+
 # run the development server
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
