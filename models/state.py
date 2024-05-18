@@ -19,6 +19,7 @@ class State(BaseModel, Base):
 
     @property
     def cities(self):
+        """city getter property"""
         var = models.storage.all()
         cities = []
         result = []
