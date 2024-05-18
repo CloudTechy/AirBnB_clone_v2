@@ -3,7 +3,7 @@
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, Table, String, Integer, Float, ForeignKey
 from sqlalchemy.orm import relationship
-from models.amenity import Amenity
+
 from os import getenv
 import models
 
@@ -78,6 +78,7 @@ class Place(BaseModel, Base):
 
         @amenities.setter
         def amenities(self, obj=None):
+            from models.amenity import Amenity
             """ Appends amenity ids to the attribute """
             if type(obj) is Amenity and obj.id not in self.amenity_ids:
                 self.amenity_ids.append(obj.id)
