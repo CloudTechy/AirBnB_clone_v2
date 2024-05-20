@@ -4,7 +4,7 @@ from models.base_model import BaseModel, Base
 from sqlalchemy.orm import relationship
 from sqlalchemy import Column, String
 import models
-import shlex
+from os import getenv
 
 
 class State(BaseModel, Base):
@@ -17,18 +17,12 @@ class State(BaseModel, Base):
     cities = relationship("City", cascade='all, delete, delete-orphan',
                           backref="state")
 
-    @property
-    def cities(self):
-        """city getter property"""
-        var = models.storage.all()
-        cities = []
-        result = []
-        for key in var:
-            city = key.replace('.', ' ')
-            city = shlex.split(city)
-            if (city[0] == 'City'):
-                cities.append(var[key])
-        for elem in cities:
-            if (elem.state_id == self.id):
-                result.append(elem)
-        return (result)
+    if getenv("HBNB_TYPE_STORAGE") != "db":
+        @property
+        def cities(self):
+            """Get a list of all related City objects."""
+            city_list = []
+            for city in list(models.storage.all(models.city.City).values()):
+                if city.state_id == self.id:
+                    city_list.append(city)
+            return city_list
