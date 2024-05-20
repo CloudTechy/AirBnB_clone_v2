@@ -8,7 +8,6 @@ from models.city import City
 from models.amenity import Amenity
 from models.place import Place, place_amenity
 from models.review import Review
-from os import getenv
 from models.engine.db_storage import DBStorage
 from models.engine.file_storage import FileStorage
 from os import getenv
