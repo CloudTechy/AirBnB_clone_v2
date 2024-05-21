@@ -6,6 +6,7 @@ Routes:
     /states_list: HTML page with a list of all State objects in DBStorage.
 """
 
+from models import storage
 from flask import Flask, render_template
 import sys
 import os
@@ -13,7 +14,6 @@ import os
 # Get the absolute path to the root directory of your project
 ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.append(ROOT_DIR)
-from models import storage
 
 
 app = Flask(__name__)
