@@ -6,7 +6,6 @@ Routes:
     /states_list: HTML page with a list of all State objects in DBStorage.
 """
 
-from models import storage
 from flask import Flask, render_template
 import sys
 import os
@@ -23,6 +22,7 @@ app = Flask(__name__)
 def cities_by_states():
     """Returns an HTML page consisting of list of cities by
     states """
+    from models import storage
     states = storage.all("State")
     return render_template('8-cities_by_states.html', states=states)
 
@@ -30,6 +30,7 @@ def cities_by_states():
 @app.teardown_appcontext
 def teardown(exc):
     """Remove the current SQLAlchemy session."""
+    from models import storage
     storage.close()
 
 

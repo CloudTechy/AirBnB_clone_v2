@@ -1,12 +1,11 @@
 #!/usr/bin/python3
-"""Modeule that starts a Flask web application.
+"""Module that starts a Flask web application.
 
 The application listens on 0.0.0.0, port 5000.
 Routes:
     /states_list: HTML page with a list of all place objects in DBStorage.
 """
 
-from models import storage
 from flask import Flask, render_template
 import sys
 import os
@@ -25,6 +24,7 @@ def states():
 
     States are sorted by name.
     """
+    from models import storage
     states = storage.all("State")
     return render_template("9-states.html", state=states)
 
@@ -32,6 +32,7 @@ def states():
 @app.route("/states/<id>", strict_slashes=False)
 def states_id(id):
     """Displays an HTML page with info about <id>, if it exists."""
+    from models import storage
     for state in storage.all("State").values():
         if state.id == id:
             return render_template("9-states.html", state=state)
@@ -41,6 +42,7 @@ def states_id(id):
 @app.teardown_appcontext
 def teardown(exc):
     """Remove the current SQLAlchemy session."""
+    from models import storage
     storage.close()
 
 
